@@ -4,9 +4,9 @@ using System.Text;
 
 namespace tabuleiro
 {
-    class tabuleiroException : Exception
+    class TabuleiroException : Exception
     {
-        public tabuleiroException(String msg) : base(msg)
+        public TabuleiroException(String msg) : base(msg)
         {
 
         }

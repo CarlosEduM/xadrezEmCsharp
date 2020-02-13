@@ -39,7 +39,7 @@ namespace tabuleiro
         {
             if (existePeca(pos))
             {
-                throw new tabuleiroException("Já existe uma peca nesta posição!");
+                throw new TabuleiroException("Já existe uma peca nesta posição!");
             }
 
             pecas[pos.linha, pos.coluna] = p;
@@ -72,7 +72,7 @@ namespace tabuleiro
         {
             if (!posicaoValida(pos))
             {
-                throw new tabuleiroException("Posição fora do tabuleiro!");
+                throw new TabuleiroException("Posição fora do tabuleiro!");
             }
         }
     }

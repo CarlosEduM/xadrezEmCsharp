@@ -8,8 +8,8 @@ namespace xadrez
     class PartidaDeXadrex
     {
         public Tabuleiro tab { get; private set; }
-        private int turno;
-        private Cor jogadorAtual;
+        public int turno { get; private set; }
+        public Cor jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
 
         public PartidaDeXadrex()
@@ -27,6 +27,40 @@ namespace xadrez
             p.incrementarQteMovimentos();
             Peca pecaCapturada = tab.retirarPeca(destino);
             tab.colocarPeca(p, destino);
+        }
+
+        public void realizarJogada(Posicao origem, Posicao destino)
+        {
+            executaMovimento(origem, destino);
+            turno++;
+
+            jogadorAtual = (jogadorAtual == Cor.Branca) ? Cor.Preta : Cor.Branca;
+        }
+
+        public void validarPosicaoOrigem(Posicao origem)
+        {
+            if(tab.Peca(origem) == null)
+            {
+                throw new TabuleiroException("Não existe essa peça no tabuleiro");
+            }
+
+            if(jogadorAtual != tab.Peca(origem).cor)
+            {
+                throw new TabuleiroException("Essa peça escolhida não é sua");
+            }
+
+            if (!tab.Peca(origem).existeMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Essa peça não possui movimentos");
+            }
+        }
+
+        public void validarPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!tab.Peca(origem).podeMoverPara(destino))
+            {
+                throw new TabuleiroException("Posição de destino invalida");
+            }
         }
 
         private void colocarPecas()
