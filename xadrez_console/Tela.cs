@@ -29,8 +29,17 @@ namespace xadrez_console
             imprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine($"Turno: {partida.turno}");
-            Console.WriteLine($"Aguardado jogador: {partida.jogadorAtual}");
-            Console.WriteLine($"{((partida.xeque) ? "Xeque!" : null )}");
+
+            if (!partida.terminada)
+            {
+                Console.WriteLine($"Aguardado jogador: {partida.jogadorAtual}");
+                Console.WriteLine($"{((partida.xeque) ? "Xeque!" : null )}");
+            }
+            else
+            {
+                Console.WriteLine("Xequemate!");
+                Console.WriteLine($"Vencedor: {partida.jogadorAtual}");
+            }
         }
 
         private static void imprimirPecasCapturadas(PartidaDeXadrex partida)
